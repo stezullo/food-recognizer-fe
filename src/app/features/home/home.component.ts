@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Utilities from '../shared/classes/utilities';
 import FileConstants from './constants/file-constants';
+import Endpoints from '../shared/constants/endpoints';
+import { NetworkService } from '../shared/services/network.service';
 
 @Component({
   selector: 'app-home',
@@ -11,22 +13,23 @@ export class HomeComponent implements OnInit {
 
   private fileInsertedType: number = FileConstants.FILE_IS_NOT_INSERTED;
 
-  constructor() { }
+  constructor(private network: NetworkService) { }
 
   ngOnInit() {
   }
 
   drop(fileList: FileList) {
-    let file: File = fileList[0];
-    console.log(file);
+    const file: File = fileList[0];
 
     // TODO do a directive about
     if (Utilities.isFileAImage(file)) {
       console.log("The file that was inserted, is a image");
       this.fileInsertedType = FileConstants.FILE_IS_IMAGE;
 
-
-
+      this.network.post(Endpoints.IMAGE_RECOGNITION, file).subscribe((value: any) => {
+        console.log("Returns from BE service : ");
+        console.log(value);
+      });
     }
     else {
       console.log("The file that was inserted, is not a image");
