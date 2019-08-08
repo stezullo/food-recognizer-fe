@@ -1,5 +1,7 @@
-export default class FileConstants {
-    static readonly FILE_IS_NOT_INSERTED: number = 0;
-    static readonly FILE_IS_IMAGE: number = 1;
-    static readonly FILE_IS_NOT_AN_IMAGE: number = 2;
+export default {
+    FILE_IS_NOT_INSERTED: 0,
+    FILE_IS_IMAGE: 1,
+    FILE_IS_NOT_AN_IMAGE: 2,
+    IMAGE_UPLOADED: 3,
+    IMAGE_UPLOADING_FAILED: 4
 }
