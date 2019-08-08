@@ -18,15 +18,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  drop(fileList: FileList) {
-    const file: File = fileList[0];
+  loadFile(fileList: FileList) {
+    let file: File = fileList[0];
 
     // TODO do a directive about
     if (Utilities.isFileAImage(file)) {
       console.log("The file that was inserted, is a image");
       this.fileInsertedType = FileConstants.FILE_IS_IMAGE;
 
-      this.network.post(Endpoints.IMAGE_RECOGNITION, file).subscribe((value: any) => {
+      this.network.postFile(Endpoints.IMAGE_RECOGNITION, file).subscribe((value: any) => {
         console.log("Returns from BE service : ");
         console.log(value);
       });
