@@ -1,0 +1,84 @@
+<div class="field" *ngIf="fileInsertedType ==
+    FILE_CONSTANTS.FILE_IS_NOT_INSERTED">
+    <div class="file is-large is-boxed is-centered">
+        <label class="file-label">
+            <input class="file-input" type="file" name="resume"
+                (change)="loadFile($event)">
+            <span class="file-cta borderDotted" appFileDrop
+                (filesDropped)="loadFile($event)">
+                <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                    Drag & drop or upload a photo of a food...
+                </span>
+            </span>
+        </label>
+    </div>
+</div>
+
+<div class="field" *ngIf="fileInsertedType ==
+    FILE_CONSTANTS.FILE_IS_IMAGE">
+    <div class="file is-large is-boxed is-warning is-centered">
+        <label class="file-label">
+            <span class="file-cta borderDotted">
+                <span class="file-icon is-medium">
+                    <app-spinner></app-spinner>
+                </span>
+                <span class="file-label paddingCustom">
+                    Image uploading...
+                </span>
+            </span>
+        </label>
+    </div>
+</div>
+
+<div class="field" *ngIf="fileInsertedType ==
+    FILE_CONSTANTS.IMAGE_UPLOADED">
+    <div class="file is-large is-boxed is-success is-centered">
+        <label class="file-label">
+            <span class="file-cta borderDotted tooltip is-tooltip-bottom"
+                data-tooltip="Click me for insert another image!"
+                (click)="resetStatus()">
+                <span class="file-icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="file-label">
+                    Upload Successful! The image has been analyzed!
+                </span>
+            </span>
+        </label>
+    </div>
+</div>
+
+<div class="field" *ngIf="fileInsertedType ==
+    FILE_CONSTANTS.FILE_IS_NOT_AN_IMAGE">
+    <div class="file is-large is-boxed is-danger is-centered">
+        <label class="file-label">
+            <span class="file-cta borderDotted">
+                <span class="file-icon">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span class="file-label">
+                    Upload Failed! The file is not a image!
+                </span>
+            </span>
+        </label>
+    </div>
+</div>
+
+<div class="field" *ngIf="fileInsertedType ==
+    FILE_CONSTANTS.IMAGE_UPLOADING_FAILED">
+    <div class="file is-large is-boxed is-danger is-centered">
+        <label class="file-label">
+            <span class="file-cta borderDotted">
+                <span class="file-icon">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span class="file-label">
+                    Upload Failed! Can't access the server!
+                </span>
+            </span>
+        </label>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<h1 class="is-size-3 has-text-centered" *ngIf="recognitionResults &&
+    recognitionResults.length> 0">Keywords
+    attached : </h1>
+
+<div class="columns" *ngIf="recognitionResults && recognitionResults.length> 0">
+    <div class="column" *ngFor="let recognitionResult of recognitionResults">
+        <div class="rows">
+            <span class="row is-size-4">{{ recognitionResult.getDescription() }}</span>
+            <span class="row is-size-4">{{ recognitionResult.getScore() }}</span>
+        </div>
+    </div>
+</div>
