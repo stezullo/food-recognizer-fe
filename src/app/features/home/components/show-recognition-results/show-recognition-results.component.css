@@ -1,0 +1,11 @@
+.reliable {
+  background-color: green;
+}
+
+.half-reliable {
+  background-color: yellow;
+}
+
+.unreliable {
+  background-color: red;
+}

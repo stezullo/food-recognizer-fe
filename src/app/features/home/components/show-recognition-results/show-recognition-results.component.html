@@ -3,10 +3,20 @@
     attached : </h1>
 
 <div class="columns" *ngIf="recognitionResults && recognitionResults.length> 0">
-    <div class="column" *ngFor="let recognitionResult of recognitionResults">
-        <div class="rows">
-            <span class="row is-size-4">{{ recognitionResult.getDescription() }}</span>
-            <span class="row is-size-4">{{ recognitionResult.getScore() }}</span>
+    <div class="column customMargin" *ngFor="let recognitionResult of
+        recognitionResults">
+        <div class="rows" [ngClass]="{'
+            reliable': (
+            getReliability(recognitionResult)>= 70),
+            'half-reliable':
+            (getReliability(recognitionResult) >= 55 &&
+            getReliability(recognitionResult) <70),
+                'unreliable':
+                (getReliability(recognitionResult) <55)
+                }">
+                <span class="row is-size-4">{{
+                    recognitionResult.getDescription() }}</span>
+                <span class="row is-size-4">{{ recognitionResult.getScore() }}</span>
+            </div>
         </div>
     </div>
-</div>

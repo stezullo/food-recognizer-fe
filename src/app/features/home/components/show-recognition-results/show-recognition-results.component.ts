@@ -19,4 +19,8 @@ export class ShowRecognitionResultsComponent implements OnInit {
     });
   }
 
+  getReliability(recognitionResult: RecognitionResult): number {
+    return recognitionResult._getScore();
+  }
+
 }

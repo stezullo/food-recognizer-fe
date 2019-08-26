@@ -1,0 +1,62 @@
+<div class="modal is-active">
+    <div class="modal-background" (click)="cancel()"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Login</p>
+            <button class="delete" aria-label="close" (click)="cancel()"></button>
+        </header>
+        <section class="modal-card-body">
+            <form [formGroup]="form">
+                <div class="rows">
+
+                    <div class="row">
+                        <input type="text" placeholder="Username"
+                            formControlName="username">
+                    </div>
+
+                    <div class="row" id="usernameValidation"
+                        *ngIf="errorMessages !== null && form
+                        &&
+                        form.get('username').errors !== null">
+                        <div class="has-text-danger" *ngFor="let validation of
+                            errorMessages.username">
+                            <div class="error-message"
+                                *ngIf="form.get('username').hasError(validation.type)
+                                &&
+                                (form.get('username').dirty ||
+                                form.get('username').touched)">
+                                {{ validation.message }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <input type="text" placeholder="Password"
+                            formControlName="password">
+                    </div>
+
+                    <div class="row" id="passwordValidation" text-center
+                        *ngIf="errorMessages !== null && form
+                        &&
+                        form.get('password').errors !== null">
+                        <div class="has-text-danger" *ngFor="let validation of
+                            errorMessages.password">
+                            <div class="error-message"
+                                *ngIf="form.get('password').hasError(validation.type)
+                                &&
+                                (form.get('password').dirty ||
+                                form.get('password').touched)">
+                                {{ validation.message }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" (click)="login()"
+                [disabled]="hasFormError()">Login</button>
+            <button class="button" (click)="cancel()">Cancel</button>
+        </footer>
+    </div>
+</div>

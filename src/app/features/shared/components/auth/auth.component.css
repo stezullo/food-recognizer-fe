@@ -1,0 +1,8 @@
+.login {
+  color: default;
+}
+
+.login:hover {
+  cursor: pointer;
+  color: rgb(60, 90, 153);
+}
