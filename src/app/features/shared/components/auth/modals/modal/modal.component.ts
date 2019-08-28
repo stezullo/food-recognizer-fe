@@ -59,12 +59,7 @@ export class ModalComponent implements OnInit {
   }
 
   login() {
-    this.form.markAllAsTouched();
-
     let user: User = Object.assign(new User(), this.form.getRawValue());
-
-    console.log(user);
-
     this.onClose.emit(user);
   }
 

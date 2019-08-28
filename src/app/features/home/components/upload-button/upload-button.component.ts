@@ -1,8 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import FILE_CONSTANTS from '../../constants/file-constants';
-import { Subject } from 'rxjs';
-import Utilities from 'src/app/features/shared/classes/utilities';
-import Endpoints from 'src/app/features/shared/constants/endpoints';
+import { Component, OnInit } from '@angular/core';
 import { UploadFileService } from '../../services/upload-file/upload-file.service';
 
 @Component({

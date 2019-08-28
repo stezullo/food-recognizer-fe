@@ -126,5 +126,10 @@
       }
     }
   },
-  "defaultProject": "foodRecognizerFE"
+  "defaultProject": "foodRecognizerFE",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

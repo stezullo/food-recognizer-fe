@@ -31,6 +31,7 @@ export class AuthComponent implements OnInit {
         .subscribe(data => {
           console.log(`User ${user.getUsername()} logged!`);
         }, error => {
+          console.log("Errore : ");
           console.log(error);
         });
     }
