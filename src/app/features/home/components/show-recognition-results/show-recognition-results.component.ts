@@ -5,7 +5,7 @@ import { UploadFileService } from '../../services/upload-file/upload-file.servic
 @Component({
   selector: 'app-show-recognition-results',
   templateUrl: './show-recognition-results.component.html',
-  styleUrls: ['./show-recognition-results.component.css']
+  styleUrls: ['./show-recognition-results.component.scss']
 })
 export class ShowRecognitionResultsComponent implements OnInit {
 

@@ -4,7 +4,7 @@ import { UploadFileService } from '../../services/upload-file/upload-file.servic
 @Component({
   selector: 'app-upload-button',
   templateUrl: './upload-button.component.html',
-  styleUrls: ['./upload-button.component.css']
+  styleUrls: ['./upload-button.component.scss']
 })
 export class UploadButtonComponent implements OnInit {
 
