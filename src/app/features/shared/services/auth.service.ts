@@ -15,14 +15,21 @@ export class AuthService {
 
   login(user: User): Observable<any> {
     return this.network.post(Endpoints.LOGIN, user)
-      .pipe(tap(res => this.setSession))
+      .pipe(tap(res => this.setSession(res)))
       .pipe(shareReplay());
   }
 
   private setSession(authResult: any) {
-    const expiresAt = moment().add(authResult.expiresIn, 'second');
+    console.log("loggin result : ");
+    console.log(authResult);
 
-    localStorage.setItem('id_token', authResult.idToken);
+    const expiresAt = moment().add(authResult.expiresInDays, 'days');
+
+    console.log("expires At : ");
+    console.log(expiresAt);
+    console.log(expiresAt.valueOf());
+
+    localStorage.setItem('id_token', authResult.token);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
   }
 

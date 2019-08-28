@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import User from 'src/app/features/shared/classes/user';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthComponent } from '../../auth.component';
 
 @Component({
   selector: 'app-modal',
@@ -12,6 +13,7 @@ export class ModalComponent implements OnInit {
   errorMessages: any;
   form: FormGroup;
 
+  @Input() authErrorMessage: string;
   @Output() onClose: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(private formBuilder: FormBuilder) { }

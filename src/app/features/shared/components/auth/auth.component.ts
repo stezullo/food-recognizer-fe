@@ -10,30 +10,43 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthComponent implements OnInit {
 
+  authErrorMessage: string;
   showModal: boolean = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authErrorMessage = "";
   }
 
   toggleModal() {
     this.showModal = !this.showModal;
   }
 
+  showErrorInModal(error) {
+    this.authErrorMessage = (error.status === 401) ? "L'username o la password non esiste." : error.message;
+  }
+
   handleModalClose(user: User) {
-    this.toggleModal();
+    this.authErrorMessage = "";
 
     console.log(user);
 
     if (user) {
       this.authService.login(user)
         .subscribe(data => {
+          console.log(data);
           console.log(`User ${user.getUsername()} logged!`);
+          this.toggleModal();
         }, error => {
-          console.log("Errore : ");
           console.log(error);
+          this.showErrorInModal(error);
         });
     }
   }
+
+  isLoggedIn() {
+    this.authService.isLoggedIn();
+  }
 }
+

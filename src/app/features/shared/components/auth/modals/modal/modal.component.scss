@@ -1,0 +1,11 @@
+.modal-card {
+  width: 400px;
+  height: 330px;
+}
+
+.centerFlex {
+  display: -webkit-flex !important; /* Safari */
+  -webkit-justify-content: center !important; /* Safari 6.1+ */
+  display: flex !important;
+  justify-content: center !important;
+}

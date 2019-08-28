@@ -16,10 +16,15 @@
             <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                 <div class="dropdown-content">
                     <div class="dropdown-item">
-                        Please, login to save your recognition results
-                        <i class="login" (click)="toggleModal()">
-                            <i class="fas fa-sign-in-alt fa-2x"></i>
-                        </i>
+                        <span *ngIf="!isLoggedIn(); else loggedIn">
+                            Please, login to save your recognition results
+                            <i class="login" (click)="toggleModal()">
+                                <i class="fas fa-sign-in-alt fa-2x"></i>
+                            </i>
+                        </span>
+                        <ng-template #loggedIn>
+                            Welcome!
+                        </ng-template>
                     </div>
                 </div>
             </div>
@@ -27,4 +32,5 @@
     </div>
 </div>
 
-<app-modal *ngIf="showModal" (onClose)="handleModalClose($event)"></app-modal>
+<app-modal *ngIf="showModal" (onClose)="handleModalClose($event)"
+    [authErrorMessage]="authErrorMessage"></app-modal>
