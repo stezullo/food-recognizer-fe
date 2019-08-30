@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import User from '../../classes/user';
-import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,9 +10,18 @@ import { AuthService } from '../../services/auth.service';
 export class AuthComponent implements OnInit {
 
   authErrorMessage: string;
-  showModal: boolean = false;
+  isLoggedIn: boolean;
+  showDropDown: boolean;
+  showModal: boolean;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    this.isLoggedIn = false;
+    this.showDropDown = false;
+    this.showModal = false;
+    this.authService.loggedIn.subscribe((isLoggedIn: boolean) => {
+      this.isLoggedIn = isLoggedIn;
+    });
+  }
 
   ngOnInit() {
     this.authErrorMessage = "";
@@ -23,20 +31,20 @@ export class AuthComponent implements OnInit {
     this.showModal = !this.showModal;
   }
 
+  toggleDropDown() {
+    this.showDropDown = !this.showDropDown;
+  }
+
   showErrorInModal(error) {
-    this.authErrorMessage = (error.status === 401) ? "L'username o la password non esiste." : error.message;
+    this.authErrorMessage = (error.status === 401) ? "Username and/or the password not exists." : error.message;
   }
 
   handleModalClose(user: User) {
-    this.authErrorMessage = "";
-
-    console.log(user);
-
     if (user) {
+      this.authErrorMessage = "";
+
       this.authService.login(user)
         .subscribe(data => {
-          console.log(data);
-          console.log(`User ${user.getUsername()} logged!`);
           this.toggleModal();
         }, error => {
           console.log(error);
@@ -45,8 +53,12 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  isLoggedIn() {
-    this.authService.isLoggedIn();
+  getUser(): string {
+    return this.authService.getUser();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
 

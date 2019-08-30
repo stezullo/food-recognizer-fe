@@ -2,6 +2,10 @@
 @import "../node_modules/bulma/css/bulma.min.css";
 @import "../node_modules/bulma-tooltip/dist/css/bulma-tooltip.min.css";
 
+body {
+  background-color: #e5edfa;
+}
+
 .rows {
   display: flex;
   flex-direction: column;
@@ -9,4 +13,11 @@
 
 .customMargin {
   margin: 1%;
+}
+
+.centerFlex {
+  display: -webkit-flex !important; /* Safari */
+  -webkit-justify-content: center !important; /* Safari 6.1+ */
+  display: flex !important;
+  justify-content: center !important;
 }

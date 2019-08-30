@@ -2,10 +2,11 @@
     <div class="column"></div>
     <div class="column"></div>
     <div class="column level">
-        <div class="dropdown is-hoverable level-item has-text-centered">
+        <div class="dropdown level-item has-text-centered"
+            [ngClass]="{'is-active': showDropDown}">
             <div class="dropdown-trigger">
                 <button class="button is-dark" aria-haspopup="true"
-                    aria-controls="dropdown-menu4">
+                    aria-controls="dropdown-menu4" (click)="toggleDropDown()">
                     <span class="icon is-medium is-light"><i class="fas
                             fa-lock"></i></span>
                     <span class="icon is-small">
@@ -13,17 +14,23 @@
                     </span>
                 </button>
             </div>
-            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+            <div class="dropdown-menu" id="dropdown-menu4"
+                role="menu">
                 <div class="dropdown-content">
                     <div class="dropdown-item">
-                        <span *ngIf="!isLoggedIn(); else loggedIn">
+                        <span *ngIf="!isLoggedIn;else loggedIn">
                             Please, login to save your recognition results
                             <i class="login" (click)="toggleModal()">
                                 <i class="fas fa-sign-in-alt fa-2x"></i>
                             </i>
                         </span>
                         <ng-template #loggedIn>
-                            Welcome!
+                            <span>
+                                Welcome {{ getUser() }}!
+                                <i class="login" (click)="logout()">
+                                    <i class="fas fa-unlock fa-2x"></i>
+                                </i>
+                            </span>
                         </ng-template>
                     </div>
                 </div>

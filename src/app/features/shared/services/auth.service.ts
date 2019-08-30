@@ -4,14 +4,19 @@ import { NetworkService } from './network.service';
 import * as moment from 'moment';
 import Endpoints from '../constants/endpoints';
 import User from '../classes/user';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private network: NetworkService) { }
+  private username: string;
+  loggedIn: BehaviorSubject<boolean>;
+
+  constructor(private network: NetworkService) {
+    this.loggedIn = new BehaviorSubject<boolean>(false);
+  }
 
   login(user: User): Observable<any> {
     return this.network.post(Endpoints.LOGIN, user)
@@ -20,35 +25,36 @@ export class AuthService {
   }
 
   private setSession(authResult: any) {
-    console.log("loggin result : ");
-    console.log(authResult);
-
     const expiresAt = moment().add(authResult.expiresInDays, 'days');
 
-    console.log("expires At : ");
-    console.log(expiresAt);
-    console.log(expiresAt.valueOf());
-
+    this.username = authResult.username;
+    this.loggedIn.next(true);
     localStorage.setItem('id_token', authResult.token);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
   }
 
   logout() {
+    this.loggedIn.next(false);
+    this.username = null;
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
   }
 
   isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    this.loggedIn.next(moment().isBefore(this.getExpiration()));
   }
 
   isLoggedOut() {
-    return !this.isLoggedIn();
+    return this.loggedIn.getValue();
   }
 
-  getExpiration() {
+  private getExpiration() {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
+  }
+
+  getUser(): string {
+    return this.username;
   }
 }
